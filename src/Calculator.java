@@ -23,15 +23,14 @@ public class Calculator {
         char operation = 0;
         char[] symbol = new char[10];
         int count = 0;
-        input = input.replace(" ", "");
+        if (input.contains("  ")) {
+            throw new RuntimeException("Выражение введено неверно");
+        }
+        inputEnteredCorrectly(input);
         for (int i = 0; i < input.length(); i++) {
             symbol[i] = input.charAt(i);
-            if (symbol[i] == '+' | symbol[i] == '-' | symbol[i] == '*' | symbol[i] == '/') {
-                count++;
-                if (count > 1) {
-                    throw new RuntimeException("Формат математической операции не удовлетворяет заданию - два операнда и один оператор (+, -, /, *)");
-                }
-            }
+            input = input.replace(" ", "");
+
             if (symbol[i] == '.' | symbol[i] == ',') {
                 throw new RuntimeException("Калькулятор умеет работать только с целыми числами.");
             }
@@ -64,7 +63,7 @@ public class Calculator {
                 throw new RuntimeException("Калькулятор умеет работать только с целыми цифрами от 1 до 10 одновременно! Попробуйте снова");
             }
             result = calculate(number1, number2, operation);
-            return "Результат выражения: " + number1 + operation + number2 + "=" + result;
+            return "Результат выражения: " + number1 + " " + operation + " " + number2 + " = " + result;
         } catch (Exception e) {
             return e.getMessage() + ": Ошибка,попробуйте еще раз";
         }
@@ -90,5 +89,26 @@ public class Calculator {
                 throw new IllegalArgumentException("Неверный знак для операции");
         }
         return result;
+    }
+
+    static Boolean inputEnteredCorrectly (String input){
+        char[] symbol = new char[10];
+        int count = 0;
+        if (input.contains("  ")) {
+            throw new RuntimeException("Выражение введено неверно");
+        }
+        for (int i = 0; i < input.length(); i++) {
+            symbol[i] = input.charAt(i);
+            if (symbol[i] == '+' | symbol[i] == '-' | symbol[i] == '*' | symbol[i] == '/') {
+                if (symbol[i - 1] != ' ' & symbol[i + 1] != ' ') {
+                    throw new RuntimeException("Выражение введено неверно");
+                }
+                count++;
+                if (count > 1) {
+                    throw new RuntimeException("Формат математической операции не удовлетворяет заданию - два операнда и один оператор (+, -, /, *)");
+                }
+            }
+        }
+        return true;
     }
 }

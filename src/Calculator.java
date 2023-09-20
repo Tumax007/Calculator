@@ -23,6 +23,7 @@ public class Calculator {
         char operation = 0;
         char[] symbol = new char[10];
         int count = 0;
+        input = input.replace(" ", "");
         for (int i = 0; i < input.length(); i++) {
             symbol[i] = input.charAt(i);
             if (symbol[i] == '+' | symbol[i] == '-' | symbol[i] == '*' | symbol[i] == '/') {

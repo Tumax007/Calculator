@@ -28,13 +28,11 @@ public class Calculator {
             if (symbol[i] == '+' | symbol[i] == '-' | symbol[i] == '*' | symbol[i] == '/') {
                 count++;
                 if (count > 1) {
-                    System.out.println("Ошибка! попробуйте еще раз.");
-                    System.exit(0);
+                    throw new RuntimeException("Формат математической операции не удовлетворяет заданию - два операнда и один оператор (+, -, /, *)");
                 }
             }
             if (symbol[i] == '.' | symbol[i] == ',') {
-                System.out.println("Калькулятор умеет работать только с целыми цифрами от 1 до 10 одновременно! Попробуйте снова.");
-                System.exit(0);
+                throw new RuntimeException("Калькулятор умеет работать только с целыми числами.");
             }
             if (symbol[i] == '+') {
                 operation = '+';
@@ -62,15 +60,13 @@ public class Calculator {
             number1 = Integer.parseInt(var0);
             number2 = Integer.parseInt(var3);
             if (number1 > 10 | number2 > 10 | number1 < 0 | number2 < 0) {
-                System.out.println("Калькулятор умеет работать только с целыми цифрами от 1 до 10 одновременно! Попробуйте снова.");
-                System.exit(0);
+                throw new RuntimeException("Калькулятор умеет работать только с целыми цифрами от 1 до 10 одновременно! Попробуйте снова");
             }
             result = calculate(number1, number2, operation);
-            System.out.println("Результат выражения: " + number1 + operation + number2 + "=" + result);
+            return "Результат выражения: " + number1 + operation + number2 + "=" + result;
         } catch (Exception e) {
-            System.out.println(e.getMessage() + ": Ошибка,попробуйте еще раз");
+            return e.getMessage() + ": Ошибка,попробуйте еще раз";
         }
-        return "";
     }
 
 

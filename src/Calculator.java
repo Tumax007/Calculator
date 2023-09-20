@@ -91,9 +91,10 @@ public class Calculator {
         return result;
     }
 
-    static Boolean inputEnteredCorrectly (String input){
+    static Boolean inputEnteredCorrectly(String input) {
         char[] symbol = new char[10];
-        int count = 0;
+        int count1 = 0;
+        int count2 = 0;
         if (input.contains("  ")) {
             throw new RuntimeException("Выражение введено неверно");
         }
@@ -106,9 +107,15 @@ public class Calculator {
                 if (input.charAt(i + 1) != ' ') {
                     throw new RuntimeException("Выражение введено неверно");
                 }
-                count++;
-                if (count > 1) {
+                count1++;
+                if (count1 > 1) {
                     throw new RuntimeException("Формат математической операции не удовлетворяет заданию - два операнда и один оператор (+, -, /, *)");
+                }
+            }
+            if (symbol[i] == ' ') {
+                count2++;
+                if (count2 > 2) {
+                    throw new RuntimeException("Выражение введено неверно");
                 }
             }
         }

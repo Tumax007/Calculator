@@ -91,7 +91,7 @@ public class Calculator {
         return result;
     }
 
-    static Boolean inputEnteredCorrectly(String input) {
+    static void inputEnteredCorrectly(String input) {
         char[] symbol = new char[10];
         int count1 = 0;
         int count2 = 0;
@@ -119,6 +119,5 @@ public class Calculator {
                 }
             }
         }
-        return true;
     }
 }

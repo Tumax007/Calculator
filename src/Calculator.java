@@ -100,7 +100,10 @@ public class Calculator {
         for (int i = 0; i < input.length(); i++) {
             symbol[i] = input.charAt(i);
             if (symbol[i] == '+' | symbol[i] == '-' | symbol[i] == '*' | symbol[i] == '/') {
-                if (symbol[i - 1] != ' ' & symbol[i + 1] != ' ') {
+                if (input.charAt(i - 1) != ' ') {
+                    throw new RuntimeException("Выражение введено неверно");
+                }
+                if (input.charAt(i + 1) != ' ') {
                     throw new RuntimeException("Выражение введено неверно");
                 }
                 count++;
